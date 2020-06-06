@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+//Bac2
+struct BacHai{
+		int a;
+		int b;
+		int c;
+	};
+	istream & operator >> (istream & in, BacHai & p);
+	ostream & operator << (ostream &out, BacHai p);
+	int tinhBacHai(BacHai A, int x);
+	BacHai operator + (BacHai A, BacHai B);
+	bool operator == (BacHai A, BacHai B);
+	bool operator != (BacHai A, BacHai B);
+//Bac1
+	struct BacNhat{
+		int a;
+		int b;
+	};
+	istream & operator >> (istream & in, BacNhat & p);
+	ostream & operator << (ostream &out, BacNhat p);
+//	int tinhBacNhat(BacNhat A, int x);
+	BacHai operator * (BacNhat A, BacNhat B);
+//	bool operator == (BacNhat A, BacNhat B);
+
+int main() {
+		BacHai p1, p2,p5,p6;
+		BacNhat p3,p4;
+		cin >> p1>>p2>>p3>>p4;
+		int x;
+		cin>>x;
+		cout << p1 << endl;
+		cout << tinhBacHai(p1,x)<<endl;
+		cout << p2 << endl;
+		cout << tinhBacHai(p2,x)<<endl;
+		p5=p1+p2;
+		cout<<p5<<endl;
+		cout << tinhBacHai(p5,x)<<endl;
+		p6=p3*p4;
+		cout<<"("<<p3<<")*("<<p4<<")="<<p6<<endl;
+		cout<<tinhBacHai(p6,x)<<endl;
+		    if(p1==p6 &&p2!=p6) cout<<"TRUE1";
+		    else if(p2==p6&&p1!=p6) cout<<"TRUE2";
+		        else if(p1==p2&&p1==p6) cout<<"TRUE3";
+		            else cout<<"FALSE";
+		return 0;
+}
+//after main
+//Bac2
+	istream & operator >> (istream & in, BacHai & p) {
+		in >> p.a >> p.b>>p.c;
+		return in;
+	};
+	ostream & operator << (ostream &out, BacHai p) {
+		out << p.a << "x^2+" << p.b<<"x+"<<p.c;
+		return out;
+	};
+	int tinhBacHai(BacHai A, int x) {
+		return A.a*x*x + A.b*x+A.c;
+	};
+	BacHai operator + (BacHai A, BacHai B) {
+		BacHai kq;
+		kq.a = A.a + B.a;
+		kq.b = A.b + B.b;
+		kq.c = A.c + B.c;
+		return kq;
+	}
+	bool operator == (BacHai A, BacHai B){
+	    if(A.a==B.a&&A.b==B.b&&A.c==B.c){
+	        return true;
+	    }
+	    return false;
+	}
+	bool operator != (BacHai A, BacHai B){
+	    if(A.a==B.a&&A.b==B.b&&A.c==B.c){
+	        return false;
+	    }
+	    return true;
+	}
+//Bac1	
+	istream & operator >> (istream & in, BacNhat & p) {
+		in >> p.a >> p.b;
+		return in;
+	};
+	ostream & operator << (ostream &out, BacNhat p) {
+		out << p.a << "x+" << p.b;
+		return out;
+	};
+// 	int tinhBacNhat(BacNhat A, int x) {
+// 		return A.a*x + A.b;
+// 	};
+	BacHai operator * (BacNhat A, BacNhat B) {
+		BacHai kq;
+		kq.a = A.a * B.a;
+		kq.b = A.a*B.b + A.b*B.a;
+		kq.c = A.b*B.b;
+		return kq;
+	}
+// 	bool operator == (BacNhat A, BacNhat B){
+// 	    return A.a+A.b==B.a+B.b;
+// 	}
